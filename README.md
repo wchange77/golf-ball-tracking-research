@@ -2,9 +2,9 @@
 
 这是一个纯静态研究网页，不依赖 npm、CDN 或后端服务。
 
-当前公网访问：<https://dublin-greeting-accompanied-finances.trycloudflare.com/>
+固定公网访问：<https://wchange77.github.io/golf-ball-tracking-research/>
 
-> 该地址是 Cloudflare 临时隧道入口；项目不依赖 GitHub Pages 自动发布。
+> 页面由 GitHub Pages 持久托管，不依赖本机静态服务器或 Cloudflare Quick Tunnel 进程。
 
 ## 打开方式
 
