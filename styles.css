@@ -11,6 +11,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans
 .brand strong,.brand small{display:block}
 .brand small{color:var(--muted);font-size:11px;letter-spacing:.1em}
 .sidebar nav{display:grid;gap:5px}
+.sidebar nav{min-height:0;overflow:auto}
 .sidebar nav a{color:var(--muted);text-decoration:none;padding:10px 13px;border-radius:11px;font-size:14px;transition:.2s}
 .sidebar nav a:hover,.sidebar nav a.active{color:var(--ink);background:var(--panel2);box-shadow:inset 3px 0 var(--teal)}
 .sidebar-note{margin-top:auto;display:flex;gap:10px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
@@ -60,6 +61,114 @@ main{grid-column:2;min-width:0}
 .section-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}
 .section-heading h2{font-size:clamp(32px,3.5vw,52px);line-height:1.1;margin:8px 0 10px;letter-spacing:-.03em}
 .section-heading p{margin:0;color:var(--muted)}
+.heading-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;flex:0 0 auto}
+.evidence-stamp{display:flex;align-items:center;gap:12px;padding:10px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.evidence-stamp strong{font-size:28px;color:var(--gold)}
+.evidence-stamp span{font-size:12px;color:var(--muted)}
+.module-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.module-card{display:flex;flex-direction:column;min-height:230px;padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.module-card>div{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.module-id{font:800 13px monospace;color:var(--gold)}
+.module-stage{font-size:10px;color:var(--muted)}
+.module-card h3{font-size:17px;line-height:1.3;margin:30px 0 10px}
+.module-card p{font-size:12px;color:var(--muted);margin:0}
+.module-card>b{margin-top:auto;padding-top:18px;font:700 10px monospace;color:var(--teal)}
+.tone-canonical{border-color:var(--teal);background:linear-gradient(150deg,rgba(88,213,201,.13),var(--panel))}
+.tone-review{border-color:var(--gold);background:linear-gradient(150deg,rgba(245,189,99,.1),var(--panel))}
+.internal-dashboard,.v47-dashboard{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,.5fr);gap:18px;margin-top:18px}
+.v47-dashboard{grid-template-columns:minmax(390px,.8fr) minmax(0,1.2fr)}
+.viz-panel,.formula-story{padding:26px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
+.panel-title h3{font-size:23px;margin:5px 0 20px}
+.lineage-flow{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr) 24px) minmax(140px,1.1fr);align-items:center;gap:4px}
+.lineage-flow>i,.biomech-chain>i,.equation-chain>i{font-style:normal;text-align:center;color:var(--teal)}
+.flow-node{min-height:90px;padding:15px;border:1px solid var(--line);border-radius:14px;background:#091814}
+.flow-node b,.flow-node span{display:block}
+.flow-node b{font-size:14px}
+.flow-node span{font-size:11px;color:var(--muted);margin-top:8px}
+.flow-node.canonical{border-color:var(--teal)}
+.flow-node.review{border-color:var(--gold)}
+.flow-node.gated{border-style:dashed}
+.boundary-banner{margin-top:18px;padding:12px 14px;border-radius:12px;background:rgba(255,139,123,.08);color:#e7b2aa;font-size:12px}
+.bar-compare{display:grid;gap:17px}
+.bar-compare>div{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:end}
+.bar-compare span{font-size:12px;color:var(--muted)}
+.bar-compare b{font:800 14px monospace;color:var(--ink)}
+.bar-compare i{grid-column:1/-1;display:block;width:var(--w);height:9px;border-radius:99px;background:linear-gradient(90deg,var(--teal),#2b8f82)}
+.bar-compare i.outline{background:transparent;border:1px dashed var(--gold)}
+.micro-note{margin:18px 0 0;color:var(--muted);font-size:11px}
+.donut-layout{display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:center}
+.issue-donut{display:grid;place-items:center;width:180px;aspect-ratio:1;border-radius:50%;background:conic-gradient(#58d5c9 0 76.82%,#f5bd63 76.82% 97.81%,#ff8b7b 97.81% 99.47%,#7fb6ff 99.47% 99.88%,#c8a7ff 99.88% 100%)}
+.issue-donut::before{content:"";grid-area:1/1;width:116px;aspect-ratio:1;border-radius:50%;background:var(--panel)}
+.issue-donut>div{grid-area:1/1;z-index:1;text-align:center}
+.issue-donut strong,.issue-donut span{display:block}
+.issue-donut strong{font-size:25px;color:var(--ink)}
+.issue-donut span{font-size:11px;color:var(--muted)}
+.issue-legend{display:grid;gap:10px}
+.issue-legend>div{display:grid;grid-template-columns:10px 1fr auto auto;gap:8px;align-items:center;font-size:11px}
+.issue-legend i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.issue-legend span{color:var(--muted)}
+.issue-legend b{font:700 11px monospace}
+.issue-legend small{width:42px;text-align:right;color:var(--muted)}
+.audit-numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.audit-numbers>div{padding:14px;border:1px solid var(--line);border-radius:13px;background:#091814}
+.audit-numbers strong,.audit-numbers span{display:block}
+.audit-numbers strong{font-size:17px;color:var(--gold)}
+.audit-numbers span{font-size:10px;color:var(--muted)}
+.quality-bar{display:flex;height:18px;margin-top:24px;overflow:hidden;border-radius:99px;background:#06110e}
+.quality-bar i{display:block;width:max(var(--w),3px)}
+.quality-bar .pass{background:var(--teal)}
+.quality-bar .correction{background:var(--red)}
+.quality-labels{display:flex;justify-content:space-between;margin-top:9px;color:var(--muted);font-size:11px}
+.quality-labels .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.pass-dot{background:var(--teal)}
+.correction-dot{background:var(--red)}
+.biomech-section>.section-heading,.biomech-section>.biomech-chain,.biomech-section>.biomech-grid,.biomech-section>.formula-story{max-width:1392px;margin-left:auto;margin-right:auto}
+.biomech-chain{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr) 26px) minmax(150px,1fr);align-items:center;margin-bottom:22px}
+.bio-node{min-height:116px;padding:18px;border:1px solid var(--line);border-radius:17px;background:var(--panel)}
+.bio-node span,.bio-node b,.bio-node small{display:block}
+.bio-node span{font:700 10px monospace;color:var(--gold)}
+.bio-node b{margin:10px 0 6px;font-size:15px}
+.bio-node small{color:var(--muted);font-size:10px}
+.bio-node.future{border-style:dashed}
+.bio-node.inferred{border-color:#756548}
+.bio-node.observed{border-color:#397064}
+.bio-node.system{border-color:var(--teal);box-shadow:inset 0 0 24px rgba(88,213,201,.06)}
+.biomech-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.biomech-card{padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.biomech-card-head{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.biomech-card-head>span{font:800 11px monospace;color:var(--gold)}
+.biomech-card-head h3{font-size:18px;margin:0}
+.biomech-card-head a{font-size:11px;color:var(--teal);text-decoration:none}
+.biomech-card dl{display:grid;gap:9px;margin:18px 0 0}
+.biomech-card dl>div{display:grid;grid-template-columns:90px 1fr;gap:12px;padding-top:9px;border-top:1px solid rgba(36,69,60,.7)}
+.biomech-card dt{font:700 10px monospace;color:var(--teal)}
+.biomech-card dd{margin:0;font-size:12px;color:var(--muted)}
+.biomech-card .boundary dt{color:var(--red)}
+.formula-story{margin-top:18px!important}
+.equation-chain{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr) 22px) minmax(150px,1fr);align-items:center}
+.equation-chain>div{padding:16px;border:1px solid var(--line);border-radius:14px;background:#06110e}
+.equation-chain span,.equation-chain b,.equation-chain small{display:block}
+.equation-chain span{font-size:10px;color:var(--gold)}
+.equation-chain b{margin:7px 0;font:700 15px monospace;color:#d9f9f3}
+.equation-chain small{font-size:10px;color:var(--muted)}
+.topology-wrap{padding:20px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 50% 45%,rgba(88,213,201,.08),transparent 37%),var(--panel);overflow:auto}
+.topology-svg{display:block;width:100%;min-width:900px;height:auto}
+.topo-lines path{fill:none;stroke:#397064;stroke-width:2}
+.topo-node rect{fill:#0a1915;stroke:var(--line);stroke-width:1.5}
+.topo-node text{text-anchor:middle;fill:var(--ink);font-size:14px;font-weight:700}
+.topo-node text.sub{fill:var(--muted);font-size:10px;font-weight:400}
+.source-node rect{stroke:#397064}
+.constraint-node rect{stroke:#7fb6ff}
+.candidate-node rect{stroke:#756548}
+.fusion-node rect{stroke:var(--teal);stroke-width:2}
+.gate-node rect{stroke:var(--gold)}
+.review-node rect{stroke:var(--red)}
+.output-node rect{stroke:#397064}
+.locked-node rect{stroke:var(--red);stroke-dasharray:7 5}
+.physics-implementation{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.physics-implementation article{padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.physics-implementation h3{margin:8px 0;font-size:19px}
+.physics-implementation p{margin:0;color:var(--muted);font-size:12px}
 .chips{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
 .chips button,.segmented button{border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:transparent;color:var(--muted);cursor:pointer}
 .chips button.active,.segmented button.active{background:var(--teal);border-color:var(--teal);color:#052019}
@@ -152,6 +261,10 @@ body.light .sidebar{background:#e8f1ed}
 body.light .topbar{background:rgba(238,244,241,.88)}
 body.light .equation,body.light .modal-equation{background:#12241f;color:#e7faf4}
 @media(max-width:1180px){.domain-grid{grid-template-columns:repeat(2,1fr)}
+.module-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.internal-dashboard,.v47-dashboard{grid-template-columns:1fr}
+.lineage-flow,.biomech-chain,.equation-chain{grid-template-columns:1fr;min-width:0}
+.lineage-flow>i,.biomech-chain>i,.equation-chain>i{transform:rotate(90deg)}
 .formula-grid,.source-grid{grid-template-columns:repeat(2,1fr)}
 .hero{grid-template-columns:1fr}
 .trajectory-card{min-height:390px}
@@ -174,14 +287,26 @@ main{grid-column:auto}
 .metric-strip{grid-template-columns:repeat(2,1fr)}
 .metric-strip article{border-bottom:1px solid var(--line)}
 .section-heading{align-items:flex-start;flex-direction:column}
+.heading-actions{justify-content:flex-start}
 .chips{justify-content:flex-start}
 .domain-grid,.formula-grid,.source-grid,.training-flow{grid-template-columns:1fr}
+.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.biomech-grid,.physics-implementation{grid-template-columns:1fr}
+.audit-numbers{grid-template-columns:repeat(2,1fr)}
 .training-layout{grid-template-columns:1fr}
 .timeline{grid-template-columns:1fr}
 .trust-stack article{margin-right:0}
 .top-actions{margin-left:0}
 .site-footer{flex-direction:column}
 .segmented{max-width:100%;overflow:auto}
+}
+@media(max-width:620px){.module-grid{grid-template-columns:1fr}
+.donut-layout{grid-template-columns:1fr;justify-items:center}
+.issue-legend{width:100%}
+.audit-numbers{grid-template-columns:1fr 1fr}
+.quality-labels{align-items:flex-start;flex-direction:column;gap:6px}
+.biomech-card dl>div{grid-template-columns:1fr}
+.module-card{min-height:200px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
 .trajectory-line{animation:none}

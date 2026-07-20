@@ -52,6 +52,22 @@ training:[
 {title:"数据准入",text:"只读人工确认 / 显式验收 labels.csv，并验证 provenance。"},{title:"分组切分",text:"按 session、shot、video 隔离 train / val / test。"},{title:"合成预训练",text:"球、模糊、曝光、背景和物理轨迹；永不进入评估。"},{title:"真实微调",text:"V1.2 reviewed centers + 场景平衡 + hard negatives。"},{title:"联合损失",text:"heatmap focal + offset SmoothL1 + visibility BCE。"},{title:"序列解码",text:"Top-K + Kalman / Viterbi；保留 MISS 与状态。"},{title:"分层评估",text:"点、轨迹、物理、场景、系统五层指标。"},{title:"部署闭环",text:"TorchScript / Core ML parity、延迟、内存、真机 QA。"}],
 timeline:[
 {year:"V1.0",title:"Pilot20",text:"证明 2D/3D 链路可运行，保留历史基线。"},{year:"V1.1",title:"Seed + TrackMan",text:"建立 210 条上下文和 20 条封存轨迹参考。"},{year:"V1.2",title:"人工球心真值",text:"210 样本、19,696 封存训练点，明确标签边界。"},{year:"V1.3 · Early",title:"模型与自训练",text:"真实训练、zero-candidate 和 completion；单模型闭环暴露风险。"},{year:"V42",title:"可恢复 Full210",text:"210/210 运行完成，但四类用户反例否决视觉正确性。"},{year:"V47 · Now",title:"逐点像素证据",text:"210 多模态复核、证据修正与高速末段恢复。"}],
+internalModules:[
+{id:"M0",stage:"研究",title:"研究与总结",status:"active / doc-only",fact:"CONTEXT、framework、模块清单与外部研究注册表是当前解释层。",tone:"research"},
+{id:"M1",stage:"V1.0",title:"Pilot20",status:"archived baseline",fact:"20 条样本证明早期 2D→3D 链路可运行，只保留历史报告。",tone:"archive"},
+{id:"M2",stage:"V1.1",title:"Seed / TrackMan / 轨迹",status:"sealed reference",fact:"210 条 seed 与对齐上下文；strict 3D 200 成功、10 真失败；2D 质量为 155 suspect / 55 broken。",tone:"reference"},
+{id:"M3",stage:"V1.2",title:"人工球心真值",status:"canonical",fact:"210 样本；19,696 封存训练点；22,209 当前有效显示点；唯一训练真值主线。",tone:"canonical"},
+{id:"M4",stage:"V1.2.1",title:"Gold11 训练证据",status:"archived subset",fact:"11 样本、2,095 点，仅作为派生训练输入证据，不是独立主线。",tone:"archive"},
+{id:"M5",stage:"V1.3 / V47",title:"模型、补全与修正",status:"review-only",fact:"V42 全量 171 ready / 33 incomplete / 6 invalid；V47 首审 2 pass / 208 needs correction。",tone:"review"}],
+v47Issues:[
+{name:"内部可见缺口",value:1296,color:"#58d5c9"},{name:"末段连续性",value:354,color:"#f5bd63"},{name:"错误目标",value:28,color:"#ff8b7b"},{name:"其他",value:7,color:"#7fb6ff"},{name:"中心偏移",value:2,color:"#c8a7ff"}],
+biomechTopics:[
+{code:"B01",title:"运动学 vs 动力学",tutelman:"位置、速度、加速度描述运动；力和力矩解释原因。",golf15:"视频直接测量 2D 运动学，RK4 表达球飞行动力学。",boundary:"仅凭像素轨迹不能唯一反推人体受力。",url:"https://www.tutelman.com/golf/biomech/concepts1.php#kine"},
+{code:"B02",title:"力矩与转动惯量",tutelman:"τ=r×F、τ=Iα；球杆长度增加力臂，也增加转动惯量。",golf15:"杆头轨迹和角/线速度可成为 impact 前观测量。",boundary:"没有人体姿态和受力传感器时，不报告关节力矩。",url:"https://www.tutelman.com/golf/biomech/torque2.php"},
+{code:"B03",title:"能量、动量与碰撞",tutelman:"功、动能、角动量和碰撞守恒连接人体做功与球的离开速度。",golf15:"impact/launch 帧、TrackMan 球速与发射状态连接视觉和飞行模型。",boundary:"TrackMan 必须人工确认 shot 匹配后才是强约束。",url:"https://www.tutelman.com/golf/biomech/energy3.php#collisions"},
+{code:"B04",title:"坐标系与功能挥杆平面",tutelman:"世界、挥杆平面、球杆坐标系与右手定则；2D 模型存在投影局限。",golf15:"相机内外参、针孔投影、D-plane 与 3D 重投影必须共享版本化坐标契约。",boundary:"单目单点只确定一条射线，深度来自独立约束。",url:"https://www.tutelman.com/golf/biomech/appconcepts2.php#coordinatesystems"},
+{code:"B05",title:"Impact model 与 D-plane",tutelman:"目标不只是杆头速度，还包括杆面、路径、击点和挥杆最低点。",golf15:"球与杆头在 impact 邻域的像素证据可连接 launch direction、spin 与 TrackMan。",boundary:"当前 ball-only 轨迹不能替代完整杆面姿态测量。",url:"https://www.tutelman.com/golf/biomech/appconcepts1.php#impactmodel"},
+{code:"B06",title:"肌肉、关节与 SSC",tutelman:"肌肉力—速度曲线、拮抗肌、活动范围和 stretch-shortening cycle 限制人体输出。",golf15:"可作为未来人体姿态、分段角速度和伤病风险研究的理论层。",boundary:"当前系统没有肌电、测力台或完整人体骨架，明确标记为未测量。",url:"https://www.tutelman.com/golf/biomech/biology4.php#ssc"}],
 sources:[
 {type:"论文",year:2019,title:"TrackNet: Tracking High-speed and Tiny Objects",note:"连续帧热图追踪高速微小球。",url:"https://arxiv.org/abs/1907.03698"},
 {type:"论文",year:2023,title:"TrackNetV3",note:"增强与轨迹修复。",url:"https://people.cs.nycu.edu.tw/~yushuen/data/TrackNetV3.pdf"},
@@ -73,4 +89,9 @@ sources:[
 {type:"官方资料",year:2026,title:"TrackMan 4",note:"双雷达、相机和完整飞行数据参数。",url:"https://www.trackman.com/golf/launch-monitors/trackman-4"},
 {type:"官方文档",year:2026,title:"Apple Core ML",note:"CPU/GPU/Neural Engine 端侧推理。",url:"https://developer.apple.com/documentation/coreml"},
 {type:"官方视频",year:2024,title:"WWDC24 Core ML Deployment",note:"性能、内存、MLComputePlan 与模型分析。",url:"https://developer.apple.com/videos/play/wwdc2024/10161/"},
-{type:"项目资料",year:2026,title:"Golf 15 Internal Research",note:"CONTEXT、模块清单、V47 issues 与物理实现。",url:"../高尔夫追球外部研究报告.md"}]};
+{type:"生物力学",year:2020,title:"Tutelman Golf Swing Biomechanics",note:"物理、生物学与挥杆应用教程总入口；作者标注为持续建设中。",url:"https://www.tutelman.com/golf/biomech/index.php"},
+{type:"生物力学",year:2020,title:"Torque and Moment of Inertia",note:"力矩、角运动、转动惯量和球杆示例。",url:"https://www.tutelman.com/golf/biomech/torque2.php"},
+{type:"生物力学",year:2020,title:"Energy, Momentum and Collision",note:"功、能量、动量与碰撞对高尔夫的解释。",url:"https://www.tutelman.com/golf/biomech/energy3.php"},
+{type:"生物力学",year:2020,title:"Golf Swing Coordinate Systems",note:"世界、挥杆平面和球杆坐标系，以及二维模型限制。",url:"https://www.tutelman.com/golf/biomech/appconcepts2.php"},
+{type:"项目资料",year:2026,title:"Golf 15 Internal Research",note:"本页内部研究全景：CONTEXT、模块清单、V47 issues 与物理实现。",url:"#internal"},
+{type:"项目资料",year:2026,title:"Golf 15 Research Report",note:"可读的完整外部研究报告，不再跳转到父目录乱码路径。",url:"高尔夫追球外部研究报告.md"}]};

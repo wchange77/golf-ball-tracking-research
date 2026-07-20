@@ -2,7 +2,9 @@
 
 这是一个纯静态研究网页，不依赖 npm、CDN 或后端服务。
 
-在线访问：<https://wchange77.github.io/golf-ball-tracking-research/>
+当前公网访问：<https://dublin-greeting-accompanied-finances.trycloudflare.com/>
+
+> 该地址是 Cloudflare 临时隧道入口；项目不依赖 GitHub Pages 自动发布。
 
 ## 打开方式
 
@@ -15,18 +17,25 @@ python3 -m http.server 8899 --bind 127.0.0.1
 然后访问：
 
 ```text
-http://127.0.0.1:8899/exportDoc/golf-ball-tracking-research/index.html
+http://127.0.0.1:8899/
 ```
 
 ## 交互
 
 - `/`：聚焦全局搜索。
-- 左侧导航：定位研究地图、流程、模型、公式、训练、证据边界和来源。
+- 左侧导航：定位内部研究、Tutelman 挥杆生物力学、证据拓扑、模型、公式、训练和来源。
 - 模型与来源按钮：按类别筛选。
 - 公式卡片：打开详细变量解释与工程用途。
 - 右上角按钮：切换明暗主题。
 
-研究正文与完整出处见 `高尔夫追球外部研究报告.md`。
+研究正文与完整出处见 `高尔夫追球外部研究报告.md`；Tutelman 与 Golf 15 的能力映射、公式链和证据边界见 `Tutelman_Golf15_生物力学映射报告.md`。
+
+## Atlas V4 内容
+
+- M0–M5 模块清单、V1.1/V1.2/Gold11/V42/V47 核心统计。
+- V47 issue 分布、审核完成度与“审核完成不等于质量通过”的口径区分。
+- 人体—球杆—碰撞—球路的生物力学链路，以及与视频证据和 TrackMan 约束的映射。
+- RK4 + 重力 + 二次阻力 + Magnus 力的状态方程、实现拓扑和验证边界。
 
 ## 证据边界
 

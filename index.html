@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Golf 15 高尔夫追球研究门户：理论、模型、训练、公式、流程与证据。">
   <title>Golf 15 · 高尔夫追球研究门户</title>
-  <link rel="stylesheet" href="styles.css?v=20260719-3">
+  <link rel="stylesheet" href="styles.css?v=20260719-4">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -17,6 +17,9 @@
       </div>
       <nav id="nav">
         <a class="active" href="#overview">总览</a>
+        <a href="#internal">内部研究</a>
+        <a href="#biomech">挥杆生物力学</a>
+        <a href="#topology">研究拓扑</a>
         <a href="#map">研究地图</a>
         <a href="#pipeline">系统流程</a>
         <a href="#models">模型比较</a>
@@ -40,14 +43,14 @@
           <input id="globalSearch" type="search" placeholder="搜索模型、公式、论文或研究域…" autocomplete="off">
           <kbd>/</kbd>
         </label>
-        <div class="top-actions"><span class="as-of">研究基准 2026-07-17 · Layout V3</span><button id="themeButton" class="icon-button" aria-label="切换明暗主题">◐</button></div>
+        <div class="top-actions"><span class="as-of">研究基准 2026-07-17 · Atlas V4</span><button id="themeButton" class="icon-button" aria-label="切换明暗主题">◐</button></div>
       </header>
 
       <section id="overview" class="hero section anchor-section">
         <div class="hero-copy">
           <span class="eyebrow">RESEARCH ATLAS · 研究增强版</span>
           <h1><span class="title-line">从一个像素点，</span><em class="title-line">推到完整球路。</em></h1>
-          <p>系统整理 golf_15 内部成果与 21 项论文、官方实现和权威资料，覆盖检测、追踪、遮挡、训练、相机几何、飞行动力学、TrackMan 与 Core ML 部署。</p>
+          <p>系统整理 Golf 15 内部 M0–M5、V47 证据链与 24 项外部论文、教程、官方实现和权威资料，覆盖挥杆生物力学、检测、追踪、遮挡、训练、相机几何、飞行动力学与端侧部署。</p>
           <div class="hero-actions">
             <a class="button primary" href="#map">探索研究地图</a>
             <a class="button secondary" href="高尔夫追球外部研究报告.md">阅读研究报告</a>
@@ -68,9 +71,100 @@
         <div class="metric-strip">
           <article><strong>16</strong><span>研究域</span></article>
           <article><strong>22</strong><span>核心公式</span></article>
-          <article><strong>21</strong><span>外部权威来源</span></article>
+          <article><strong>24</strong><span>外部权威来源</span></article>
           <article><strong>210</strong><span>项目视频样本</span></article>
           <article><strong>19,696</strong><span>封存训练点</span></article>
+        </div>
+      </section>
+
+      <section id="internal" class="section anchor-section internal-section">
+        <div class="section-heading"><div><span class="eyebrow">GOLF 15 INTERNAL RESEARCH</span><h2>内部研究全景</h2><p>以 CONTEXT、模块清单、V47 审核产物和物理代码为依据；状态、数字和标签边界分开表达。</p></div><div class="evidence-stamp"><strong>6</strong><span>权威模块</span></div></div>
+        <div id="moduleGrid" class="module-grid"></div>
+        <div class="internal-dashboard">
+          <article class="viz-panel lineage-panel">
+            <div class="panel-title"><span class="eyebrow">DATA LINEAGE</span><h3>从采集到训练的权威链</h3></div>
+            <div class="lineage-flow" role="img" aria-label="Golf 15 数据权威链：高速视频和 TrackMan 经过人工锚点、V1.2 真值、V47 审核后，只有显式准入的数据可以进入训练">
+              <div class="flow-node source"><b>采集</b><span>高速视频 · TrackMan</span></div><i>→</i>
+              <div class="flow-node"><b>V1.1</b><span>210 seed / 对齐上下文</span></div><i>→</i>
+              <div class="flow-node canonical"><b>V1.2</b><span>19,696 封存训练点</span></div><i>→</i>
+              <div class="flow-node review"><b>V47</b><span>像素证据与人工修正</span></div><i>→</i>
+              <div class="flow-node gated"><b>显式导出门禁</b><span>labelEligible=true</span></div>
+            </div>
+            <div class="boundary-banner"><b>不可跨越：</b>模型预测、插值、TrackMan 重投影和 review-only 修正不会自动成为训练标签。</div>
+          </article>
+          <article class="viz-panel v12-panel">
+            <div class="panel-title"><span class="eyebrow">V1.2 CANONICAL</span><h3>真值与显示层不是同一个数字</h3></div>
+            <div class="bar-compare">
+              <div><span>封存训练导出</span><b>19,696</b><i style="--w:88.68%"></i></div>
+              <div><span>当前有效显示点</span><b>22,209</b><i style="--w:100%"></i></div>
+              <div><span>最新人工审核记录</span><b>28,925</b><i style="--w:100%" class="outline"></i></div>
+            </div>
+            <p class="micro-note">显示并集不会自动改写封存训练集；cleared / ignore 会覆盖旧显示点。</p>
+          </article>
+        </div>
+        <div class="v47-dashboard">
+          <article class="viz-panel issue-donut-panel">
+            <div class="panel-title"><span class="eyebrow">V47 ISSUE ATLAS</span><h3>1,687 个问题如何分布</h3></div>
+            <div class="donut-layout"><div class="issue-donut"><div><strong>1,687</strong><span>问题段</span></div></div><div id="issueLegend" class="issue-legend"></div></div>
+          </article>
+          <article class="viz-panel audit-panel">
+            <div class="panel-title"><span class="eyebrow">AUDIT ≠ ACCEPTANCE</span><h3>全量看完，不等于质量通过</h3></div>
+            <div class="audit-numbers"><div><strong>210 / 210</strong><span>样本完成首审</span></div><div><strong>642 / 642</strong><span>联系表完成查看</span></div><div><strong>51,986</strong><span>证据帧</span></div><div><strong>14,719</strong><span>问题帧</span></div></div>
+            <div class="quality-bar" aria-label="V47 质量结论：2 条通过，208 条需要修正"><i class="pass" style="--w:.952%"></i><i class="correction" style="--w:99.048%"></i></div>
+            <div class="quality-labels"><span><i class="dot pass-dot"></i>pass 2</span><span><i class="dot correction-dot"></i>needs correction 208</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="biomech" class="section anchor-section panel-section biomech-section">
+        <div class="section-heading"><div><span class="eyebrow">TUTELMAN × GOLF 15</span><h2>挥杆生物力学映射</h2><p>把人体与球杆的上游机制，连接到 Golf 15 能直接测量的像素、速度、碰撞和球路；明确哪些只能推断、哪些尚未覆盖。</p></div><div class="heading-actions"><a class="button secondary" href="Tutelman_Golf15_生物力学映射报告.md">中文映射报告</a><a class="button secondary" href="https://www.tutelman.com/golf/biomech/index.php" target="_blank" rel="noreferrer">打开原教程 ↗</a></div></div>
+        <div class="biomech-chain" role="img" aria-label="人体到球路的测量链">
+          <div class="bio-node future"><span>人体</span><b>肌肉 · 关节 · SSC</b><small>当前未直接测量</small></div><i>→</i>
+          <div class="bio-node inferred"><span>动力学</span><b>力 · 力矩 · 能量</b><small>需要人体/杆上传感器</small></div><i>→</i>
+          <div class="bio-node observed"><span>球杆</span><b>位置 · 角速度 · 杆头</b><small>视频可部分观测</small></div><i>→</i>
+          <div class="bio-node observed"><span>碰撞</span><b>impact · D-plane</b><small>视频 + TrackMan 约束</small></div><i>→</i>
+          <div class="bio-node system"><span>球路</span><b>2D / 3D · RK4</b><small>Golf 15 核心研究</small></div>
+        </div>
+        <div id="biomechGrid" class="biomech-grid"></div>
+        <article class="formula-story">
+          <div class="panel-title"><span class="eyebrow">VISUAL EQUATION CHAIN</span><h3>从人体施力到高尔夫球飞行</h3></div>
+          <div class="equation-chain">
+            <div><span>力矩</span><b>τ = r × F</b><small>施力点与力臂</small></div><i>→</i>
+            <div><span>角加速度</span><b>α = τ / I</b><small>转动惯量约束</small></div><i>→</i>
+            <div><span>杆头线速度</span><b>vₕ = ω × r</b><small>角运动转线运动</small></div><i>→</i>
+            <div><span>碰撞冲量</span><b>J = Δp</b><small>动量传递给球</small></div><i>→</i>
+            <div><span>发射状态</span><b>s₀ = [p₀,v₀,ω]</b><small>速度、角度、自旋</small></div><i>→</i>
+            <div><span>飞行动力学</span><b>ṡ = f(g,D,M)</b><small>RK4 + drag + Magnus</small></div>
+          </div>
+          <p class="micro-note">Golf 15 当前从“球杆/碰撞”向右证据更强；不能仅凭球路反推出唯一的肌肉激活或关节力矩。</p>
+        </article>
+      </section>
+
+      <section id="topology" class="section anchor-section topology-section">
+        <div class="section-heading"><div><span class="eyebrow">EVIDENCE TOPOLOGY</span><h2>证据、状态与产物拓扑</h2><p>同一个点可能来自观测、预测或人工；拓扑先区分来源，再决定它能否进入 2D、3D 或训练出口。</p></div></div>
+        <div class="topology-wrap">
+          <svg class="topology-svg" viewBox="0 0 1200 560" role="img" aria-labelledby="topologyTitle topologyDesc">
+            <title id="topologyTitle">Golf 15 证据拓扑图</title><desc id="topologyDesc">高速视频、人工锚点、TrackMan、模型和传统视觉进入证据融合，经过状态机与质量门禁，分别流向人工审核、二维轨迹、三维物理和受控训练导出。</desc>
+            <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#58d5c9"/></marker></defs>
+            <g class="topo-lines" marker-end="url(#arrow)"><path d="M180 90 C280 90 280 210 390 210"/><path d="M180 180 C290 180 280 230 390 230"/><path d="M180 270 C290 270 280 250 390 250"/><path d="M180 360 C290 360 280 270 390 270"/><path d="M180 450 C290 450 280 290 390 290"/><path d="M570 250 C650 250 650 160 735 160"/><path d="M570 250 C650 250 650 275 735 275"/><path d="M570 250 C650 250 650 390 735 390"/><path d="M915 160 C1010 160 1010 100 1080 100"/><path d="M915 275 C1010 275 1010 275 1080 275"/><path d="M915 390 C1010 390 1010 450 1080 450"/></g>
+            <g class="topo-node source-node"><rect x="20" y="55" width="160" height="70" rx="16"/><text x="100" y="84">高速视频</text><text class="sub" x="100" y="106">直接像素</text></g>
+            <g class="topo-node source-node"><rect x="20" y="145" width="160" height="70" rx="16"/><text x="100" y="174">人工锚点</text><text class="sub" x="100" y="196">最高权威</text></g>
+            <g class="topo-node constraint-node"><rect x="20" y="235" width="160" height="70" rx="16"/><text x="100" y="264">TrackMan</text><text class="sub" x="100" y="286">确认后才是强约束</text></g>
+            <g class="topo-node candidate-node"><rect x="20" y="325" width="160" height="70" rx="16"/><text x="100" y="354">模型候选</text><text class="sub" x="100" y="376">TrackNet / TAPIR</text></g>
+            <g class="topo-node candidate-node"><rect x="20" y="415" width="160" height="70" rx="16"/><text x="100" y="444">传统视觉</text><text class="sub" x="100" y="466">光流 / OpenCV</text></g>
+            <g class="topo-node fusion-node"><rect x="390" y="190" width="180" height="120" rx="22"/><text x="480" y="230">证据融合</text><text class="sub" x="480" y="255">observed / predicted</text><text class="sub" x="480" y="278">conflict / MISS</text></g>
+            <g class="topo-node gate-node"><rect x="735" y="115" width="180" height="90" rx="18"/><text x="825" y="151">状态机</text><text class="sub" x="825" y="176">launch · flight · lost</text></g>
+            <g class="topo-node gate-node"><rect x="735" y="230" width="180" height="90" rx="18"/><text x="825" y="266">质量门禁</text><text class="sub" x="825" y="291">跳点 · 缺口 · 终点</text></g>
+            <g class="topo-node review-node"><rect x="735" y="345" width="180" height="90" rx="18"/><text x="825" y="381">人工审核</text><text class="sub" x="825" y="406">V47 review store</text></g>
+            <g class="topo-node output-node"><rect x="1020" y="65" width="160" height="70" rx="16"/><text x="1100" y="94">2D 轨迹</text><text class="sub" x="1100" y="116">质量标记保留</text></g>
+            <g class="topo-node output-node"><rect x="1020" y="240" width="160" height="70" rx="16"/><text x="1100" y="269">3D / 物理</text><text class="sub" x="1100" y="291">重投影 + RK4</text></g>
+            <g class="topo-node locked-node"><rect x="1020" y="415" width="160" height="70" rx="16"/><text x="1100" y="444">训练导出</text><text class="sub" x="1100" y="466">显式准入才解锁</text></g>
+          </svg>
+        </div>
+        <div class="physics-implementation">
+          <article><span class="eyebrow">IMPLEMENTED</span><h3>可微 RK4</h3><p>状态固定为 [x,y,z,vx,vy,vz]；默认 dt=0.002，积分过程中保留固定张量形状，落地与 carry/apex 后处理。</p></article>
+          <article><span class="eyebrow">FORCE MODEL</span><h3>重力 + 阻力 + Magnus</h3><p>相对风速进入平方阻力；自旋轴叉积给升力方向，Cd、Cl、风和自旋都必须表达工况与不确定性。</p></article>
+          <article><span class="eyebrow">VALIDATION</span><h3>解析与性质测试</h3><p>无阻力无自旋对照解析抛物线；验证阻力缩短距离、Magnus 改变 apex/carry，以及批量轨迹与梯度稳定性。</p></article>
         </div>
       </section>
 
@@ -124,7 +218,7 @@
     </main>
   </div>
   <div id="formulaModal" class="modal" hidden><div class="modal-backdrop" data-close-modal></div><article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close-modal aria-label="关闭">×</button><span id="modalCategory" class="eyebrow"></span><h2 id="modalTitle"></h2><div id="modalEquation" class="modal-equation"></div><div id="modalBody"></div></article></div>
-  <script src="research-data.js?v=20260719-3"></script>
-  <script src="app.js?v=20260719-3"></script>
+  <script src="research-data.js?v=20260719-4"></script>
+  <script src="app.js?v=20260719-4"></script>
 </body>
 </html>
