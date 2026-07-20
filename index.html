@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Golf 15 高尔夫追球研究门户：理论、模型、训练、公式、流程与证据。">
+  <title>Golf 15 · 高尔夫追球研究门户</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="研究门户导航">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">G15</span>
+        <div><strong>Golf 15</strong><small>Ball Tracking Atlas</small></div>
+      </div>
+      <nav id="nav">
+        <a class="active" href="#overview">总览</a>
+        <a href="#map">研究地图</a>
+        <a href="#pipeline">系统流程</a>
+        <a href="#models">模型比较</a>
+        <a href="#formulas">公式推导</a>
+        <a href="#training">训练体系</a>
+        <a href="#evidence">证据边界</a>
+        <a href="#timeline">研究演进</a>
+        <a href="#sources">外部来源</a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="status-dot"></span>
+        <div><strong>当前主线</strong><small>V47 像素证据修正</small></div>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header class="topbar">
+        <button id="menuButton" class="icon-button" aria-label="打开导航" aria-expanded="false">☰</button>
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="globalSearch" type="search" placeholder="搜索模型、公式、论文或研究域…" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <div class="top-actions"><span class="as-of">研究基准 2026-07-17</span><button id="themeButton" class="icon-button" aria-label="切换明暗主题">◐</button></div>
+      </header>
+
+      <section id="overview" class="hero section anchor-section">
+        <div class="hero-copy">
+          <span class="eyebrow">RESEARCH ATLAS · 研究增强版</span>
+          <h1>从一个像素点，<br><em>推到完整球路。</em></h1>
+          <p>系统整理 golf_15 内部成果与 21 项论文、官方实现和权威资料，覆盖检测、追踪、遮挡、训练、相机几何、飞行动力学、TrackMan 与 Core ML 部署。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#map">探索研究地图</a>
+            <a class="button secondary" href="高尔夫追球外部研究报告.md">阅读研究报告</a>
+          </div>
+        </div>
+        <div class="trajectory-card" aria-label="研究主线示意图">
+          <div class="trajectory-grid"></div>
+          <svg viewBox="0 0 520 280" role="img" aria-label="高尔夫球从击球到飞行的轨迹示意">
+            <defs><linearGradient id="line" x1="0" x2="1"><stop stop-color="#58d5c9"/><stop offset="1" stop-color="#f5bd63"/></linearGradient></defs>
+            <path class="trajectory-shadow" d="M32 238 C128 210 149 55 302 42 C390 35 459 100 490 178"/>
+            <path class="trajectory-line" d="M32 238 C128 210 149 55 302 42 C390 35 459 100 490 178"/>
+            <g class="trajectory-points"><circle cx="32" cy="238" r="7"/><circle cx="128" cy="167" r="5"/><circle cx="220" cy="70" r="5"/><circle cx="302" cy="42" r="5"/><circle cx="403" cy="73" r="5"/><circle cx="490" cy="178" r="7"/></g>
+          </svg>
+          <div class="trajectory-label launch"><b>Launch</b><span>像素证据 + 状态机</span></div>
+          <div class="trajectory-label apex"><b>Apex</b><span>RK4 + Drag + Magnus</span></div>
+          <div class="trajectory-label terminal"><b>Terminal</b><span>终点连续性门禁</span></div>
+        </div>
+        <div class="metric-strip">
+          <article><strong>16</strong><span>研究域</span></article>
+          <article><strong>22</strong><span>核心公式</span></article>
+          <article><strong>21</strong><span>外部权威来源</span></article>
+          <article><strong>210</strong><span>项目视频样本</span></article>
+          <article><strong>19,696</strong><span>封存训练点</span></article>
+        </div>
+      </section>
+
+      <section id="map" class="section anchor-section">
+        <div class="section-heading"><div><span class="eyebrow">KNOWLEDGE MAP</span><h2>研究地图</h2><p>按问题域筛选，快速找到理论、方法、项目载体和下一步。</p></div><div id="domainFilters" class="chips" aria-label="研究域筛选"></div></div>
+        <div id="domainGrid" class="domain-grid"></div>
+      </section>
+
+      <section id="pipeline" class="section anchor-section panel-section">
+        <div class="section-heading"><div><span class="eyebrow">END-TO-END</span><h2>系统流程</h2><p>每一步都明确输入、产出和不可越过的门禁。</p></div></div>
+        <div id="pipelineSteps" class="pipeline"></div>
+      </section>
+
+      <section id="models" class="section anchor-section">
+        <div class="section-heading"><div><span class="eyebrow">MODEL LANDSCAPE</span><h2>模型与方法比较</h2><p>模型能力不等于标签权威；“适用角色”比单一排名更重要。</p></div><div class="segmented" role="group" aria-label="模型筛选"><button class="active" data-model-filter="all">全部</button><button data-model-filter="detector">检测</button><button data-model-filter="tracker">跟踪</button><button data-model-filter="physics">物理</button><button data-model-filter="deploy">部署</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th>模型 / 方法</th><th>核心结构</th><th>优势</th><th>主要风险</th><th>在 Golf 15 中的角色</th><th>证据级别</th></tr></thead><tbody id="modelRows"></tbody></table></div>
+      </section>
+
+      <section id="formulas" class="section anchor-section formula-section">
+        <div class="section-heading"><div><span class="eyebrow">MATH LAB</span><h2>公式与推导</h2><p>点击卡片查看变量、推导路径、工程用途与证据边界。</p></div><label class="select-label">类别<select id="formulaFilter"><option value="all">全部公式</option></select></label></div>
+        <div id="formulaGrid" class="formula-grid"></div>
+      </section>
+
+      <section id="training" class="section anchor-section panel-section">
+        <div class="section-heading"><div><span class="eyebrow">TRAINING SYSTEM</span><h2>模型训练体系</h2><p>合成预训练、真实微调、难例闭环、评估和端侧部署。</p></div></div>
+        <div class="training-layout"><div id="trainingFlow" class="training-flow"></div><aside class="checklist-card"><span class="eyebrow">NON-NEGOTIABLE</span><h3>训练数据准入</h3><ul><li>人工确认或显式验收规则</li><li>按 session / shot 分组切分</li><li>synthetic 永不进入评估集</li><li>预测、平滑和物理点默认拒绝</li><li>每次导出保留 provenance</li></ul><div class="policy-badge">labelEligible = true 才可进入</div></aside></div>
+      </section>
+
+      <section id="evidence" class="section anchor-section">
+        <div class="section-heading"><div><span class="eyebrow">TRUST ARCHITECTURE</span><h2>证据信任层级</h2><p>解决“一个点为什么可以相信”的核心问题。</p></div></div>
+        <div class="trust-stack">
+          <article class="trust-1"><span>01</span><div><h3>人工权威点</h3><p>逐帧确认、完整 provenance，任何自动流程不得覆盖。</p></div><b>可训练</b></article>
+          <article class="trust-2"><span>02</span><div><h3>直接像素测量</h3><p>局部目标、时序差分、连通域与一致光流共同支撑。</p></div><b>待审核</b></article>
+          <article class="trust-3"><span>03</span><div><h3>多证据自动候选</h3><p>热图、形态、运动和轨迹一致，但仍是 review-only。</p></div><b>候选</b></article>
+          <article class="trust-4"><span>04</span><div><h3>外部与物理约束</h3><p>确认后的 TrackMan、相机几何和 RK4 物理用于校验。</p></div><b>约束</b></article>
+          <article class="trust-5"><span>05</span><div><h3>预测与先验</h3><p>Kalman、插值、TAPIR、CoTracker、模型和相似轨迹。</p></div><b>搜索 / 反证</b></article>
+        </div>
+      </section>
+
+      <section id="timeline" class="section anchor-section panel-section">
+        <div class="section-heading"><div><span class="eyebrow">RESEARCH EVOLUTION</span><h2>从 Pilot20 到 V47</h2><p>保留成功，也保留被真实反例否决的路线。</p></div></div>
+        <div id="timelineList" class="timeline"></div>
+      </section>
+
+      <section id="sources" class="section anchor-section">
+        <div class="section-heading"><div><span class="eyebrow">EVIDENCE LIBRARY</span><h2>外部来源</h2><p>论文、作者代码和官方文档。点击可访问原始来源。</p></div><div class="source-tools"><span id="sourceCount"></span><select id="sourceFilter" aria-label="来源类型筛选"><option value="all">全部类型</option></select></div></div>
+        <div id="sourceGrid" class="source-grid"></div>
+      </section>
+
+      <footer class="site-footer"><div><strong>Golf 15 Research Atlas</strong><span>内部项目事实 + 外部权威研究</span></div><p>自动候选不是训练标签 · TrackMan 需人工确认 · 物理主线为 RK4 + drag + Magnus</p></footer>
+    </main>
+  </div>
+  <div id="formulaModal" class="modal" hidden><div class="modal-backdrop" data-close-modal></div><article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close-modal aria-label="关闭">×</button><span id="modalCategory" class="eyebrow"></span><h2 id="modalTitle"></h2><div id="modalEquation" class="modal-equation"></div><div id="modalBody"></div></article></div>
+  <script src="research-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
